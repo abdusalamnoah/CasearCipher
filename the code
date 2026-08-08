@@ -1,0 +1,31 @@
+def ShiftKey():
+    shift = int(input("Enter the number for which letters will be shifted by: "))
+    return shift
+def encrypt(text):
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    key = ShiftKey()
+    position = 0
+    newword = [i for i in text.lower()]
+    for x in newword[:]:
+        if x in alphabet:
+            newword[position] = alphabet[(alphabet.index(x) + key)%26]
+        else:
+            newword[position] = newword[position]
+        position += 1
+    return "".join(newword)
+def decrypt(text):
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    position = 0
+    for i in range(26):
+        newword = [i for i in text.lower()]
+        for x in newword[:]:
+            if x in alphabet:
+                newword[position] = alphabet[(alphabet.index(x) - i)%26]
+            else:
+                newword[position] = newword[position]
+            position += 1
+        print("".join(newword))
+        position = 0
+print(encrypt(input("Enter the text to be encrypted: ")))
+
+print(decrypt(input("Enter the text to be decrypted: ")))
